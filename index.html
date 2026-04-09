@@ -796,3 +796,33 @@
         <p>Paroisse Saint François d'Assise de Covè</p>
       </div>
       <div class="agenda-he                  
++229 <div class="agenda-item">
+      <div class="agenda-jour">Chaque<br>Jeudi</div>
+      <div class="agenda-info">
+        <h4>Service Presse et Informations</h4>
+        <p>Paroisse Saint François d'Assise de Covè</p>
+      </div>
+      <div class="agenda-heure">19h00</div>
+    </div>
+    <div class="agenda-item">
+      <div class="agenda-jour">Chaque<br>Vendredi</div>
+      <div class="agenda-info">
+        <h4>Service Formation et Enseignement</h4>
+        <p>Paroisse Saint François d'Assise de Covè</p>
+      </div>
+      <div class="agenda-heure">19h00</div>
+    </div>
+    <div class="agenda-item">
+      <div class="agenda-jour">Chaque<br>Dimanche</div>
+      <div class="agenda-info">
+        <h4>Service Chant et Musique</h4>
+        <p>Paroisse Saint François d'Assise de Covè</p>
+      </div>
+      <div class="agenda-heure">15h00</div>
+    </div>
+  </div>
+</section>
+<section id="contact"><div class="contact-grid"><div class="contact-info"><p class="section-label">Nous rejoindre</p><h2 class="section-title">Contact</h2><div class="section-line"></div><h3>Secrétariat du Mouvement</h3><div class="contact-item"><div class="contact-icon">📍</div><div class="contact-item-text"><strong>Adresse</strong><span>Paroisse Saint François d'Assise<br>Covè, Zou — Bénin</span></div></div><div class="contact-item"><div class="contact-icon">📱</div><div class="contact-item-text"><strong>WhatsApp / Téléphone</strong><span><a href="https://wa.me/2290196002842" style="color:var(--ambre);text-decoration:none;">+229 01 96 00 28 42</a></span></div></div><div class="contact-item"><div class="contact-icon">⛪</div><div class="contact-item-text"><strong>Diocèse</strong><span>Diocèse d'Abomey</span></div></div></div><div><p class="section-label">Envoyer un message</p><h3 style="font-family:'Cinzel',serif;color:var(--bleu);font-size:1.1rem;margin-bottom:1.5rem;">Écrivez-nous</h3><div class="contact-form" id="contactForm"><input type="text" placeholder="Votre nom complet" id="nom"/><input type="tel" placeholder="Votre numéro de téléphone" id="tel"/><input type="text" placeholder="Objet de votre message" id="objet"/><textarea placeholder="Votre message..." id="message"></textarea><button class="btn-send" onclick="envoyerMessage()">Envoyer le message →</button></div><div class="form-success" id="formSuccess">🕊️ Merci pour votre message !<br>Le secrétariat vous répondra très prochainement.<br><br><em>Que l'Esprit Saint vous bénisse.</em></div></div></div></section>
+<footer><p class="footer-name">Renouveau Charismatique Catholique</p><p>Paroisse Saint François d'Assise de Covè &nbsp;|&nbsp; Diocèse d'Abomey, Bénin</p><p style="margin-top:0.5rem;">« Viens, Esprit Saint, remplis le cœur de tes fidèles. » 🔥</p></footer>
+<script>const container=document.getElementById('flames');for(let i=0;i<25;i++){const p=document.createElement('div');p.className='particle';p.style.cssText=`left:${Math.random()*100}%;--dur:${3+Math.random()*5}s;--delay:${Math.random()*6}s;width:${2+Math.random()*3}px;height:${2+Math.random()*3}px;background:${Math.random()>0.5?'#c9a84c':'#e8891a'};`;container.appendChild(p);}document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'});});});function envoyerMessage(){const n=document.getElementById('nom').value.trim();const m=document.getElementById('message').value.trim();if(!n||!m){alert('Veuillez renseigner votre nom et votre message.');return;}document.getElementById('contactForm').style.display='none';document.getElementById('formSuccess').style.display='block';}const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';}});},{threshold:0.1});document.querySelectorAll('.pilier,.actu-card,.agenda-item,.contact-item').forEach(el=>{el.style.opacity='0';el.style.transform='translateY(15px)';el.style.transition='opacity 0.5s ease,transform 0.5s ease';observer.observe(el);});</script>
+</body></html>
