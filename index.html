@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Renouveau Charismatique – St François d'Assise de Covè</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lora:ital,wght@0,400;0,500;1,400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bleu: #0d1b4b;
+    --bleu-mid: #1a3070;
+    --or: #c9a84c;
+    --or-clair: #f0d080;
+    --ambre: #e8891a;
+    --blanc: #fdfaf4;
+    --texte: #2a1f0e;
+    --gris-doux: #f5f0e8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: var(--blanc);
+    color: var(--texte);
+    overflow-x: hidden;
+  }
+
+  /* ===== NAV ===== */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(13, 27, 75, 0.97);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(201, 168, 76, 0.3);
+    padding: 0 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 62px;
+  }
+
+  .nav-logo {
+    font-family: 'Cinzel', serif;
+    font-size: 0.78rem;
+    color: var(--or);
+    letter-spacing: 0.05em;
+    line-height: 1.3;
+  }
+
+  .nav-logo span { color: var(--blanc); font-size: 0.65rem; display: block; }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: rgba(253,250,244,0.75);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--or); }
+
+  /* ===== HERO ===== */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(160deg, #0d1b4b 0%, #1a3070 45%, #0d2b1a 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 100px 5% 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 30%, rgba(201,168,76,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 80% 80%, rgba(232,137,26,0.08) 0%, transparent 60%);
+  }
+
+  /* Flame animation */
+  .flame-container {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .particle {
+    position: absolute;
+    bottom: -20px;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--or);
+    opacity: 0;
+    animation: rise var(--dur) ease-in var(--delay) infinite;
+  }
+
+  @keyframes rise {
+    0% { transform: translateY(0) scale(1); opacity: 0.8; }
+    100% { transform: translateY(-100vh) scale(0); opacity: 0; }
+  }
+
+  .hero-content { position: relative; z-index: 2; max-width: 780px; }
+
+  .hero-eyebrow {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--or);
+    margin-bottom: 1.2rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.2s forwards;
+  }
+
+  .hero-symbol {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.4s forwards;
+    filter: drop-shadow(0 0 20px rgba(201,168,76,0.6));
+  }
+
+  .hero h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.8rem, 5vw, 3.2rem);
+    font-weight: 700;
+    color: var(--blanc);
+    line-height: 1.15;
+    margin-bottom: 0.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.5s forwards;
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    color: var(--or);
+  }
+
+  .hero-sub {
+    font-family: 'Lora', serif;
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    color: rgba(253,250,244,0.65);
+    margin-bottom: 0.4rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.65s forwards;
+  }
+
+  .hero-diocese {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--or);
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.75s forwards;
+    margin-bottom: 2rem;
+  }
+
+  .hero-verse {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: rgba(253,250,244,0.55);
+    border-left: 2px solid var(--or);
+    padding-left: 1rem;
+    text-align: left;
+    display: inline-block;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.9s forwards;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 1.1s forwards;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--or), var(--ambre));
+    color: var(--bleu);
+    padding: 0.85rem 2rem;
+    border-radius: 3px;
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 20px rgba(201,168,76,0.4);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(201,168,76,0.5);
+  }
+
+  .btn-ghost {
+    border: 1px solid rgba(201,168,76,0.5);
+    color: var(--or);
+    padding: 0.85rem 2rem;
+    border-radius: 3px;
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .btn-ghost:hover {
+    background: rgba(201,168,76,0.1);
+    border-color: var(--or);
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(253,250,244,0.3);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    animation: bounce 2s ease infinite;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(6px); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== DIVIDER ===== */
+  .divider {
+    height: 4px;
+    background: linear-gradient(90deg, transparent, var(--or), var(--ambre), var(--or), transparent);
+  }
+
+  /* ===== SECTIONS COMMUNES ===== */
+  section { padding: 80px 5%; }
+
+  .section-label {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ambre);
+    margin-bottom: 0.6rem;
+  }
+
+  .section-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+    color: var(--bleu);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .section-line {
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--or), var(--ambre));
+    margin-bottom: 2rem;
+  }
+
+  /* ===== QUI SOMMES-NOUS ===== */
+  #identite {
+    background: var(--gris-doux);
+  }
+
+  .identite-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .identite-text p {
+    font-family: 'Lora', serif;
+    font-size: 1rem;
+    line-height: 1.85;
+    color: #3a2f1e;
+    margin-bottom: 1.2rem;
+  }
+
+  .piliers {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+  }
+
+  .pilier {
+    background: var(--blanc);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-top: 3px solid var(--or);
+    padding: 1.4rem 1.2rem;
+    border-radius: 2px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .pilier:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(13,27,75,0.08);
+  }
+
+  .pilier-icon { font-size: 1.8rem; margin-bottom: 0.5rem; }
+
+  .pilier h4 {
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    color: var(--bleu);
+    margin-bottom: 0.3rem;
+  }
+
+  .pilier p {
+    font-size: 0.82rem;
+    color: #666;
+    line-height: 1.5;
+  }
+
+  /* ===== ACTUALITÉS ===== */
+  #actualites { background: var(--blanc); }
+
+  .actu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .actu-card {
+    background: var(--gris-doux);
+    border-radius: 2px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid rgba(201,168,76,0.15);
+  }
+
+  .actu-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 35px rgba(13,27,75,0.1);
+  }
+
+  .actu-header {
+    background: linear-gradient(135deg, var(--bleu), var(--bleu-mid));
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .actu-header::after {
+    content: '';
+    position: absolute;
+    bottom: -20px; right: -20px;
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    background: rgba(201,168,76,0.1);
+  }
+
+  .actu-date {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--or);
+    margin-bottom: 0.4rem;
+  }
+
+  .actu-header h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    color: var(--blanc);
+    line-height: 1.3;
+  }
+
+  .actu-body {
+    padding: 1.2rem 1.5rem 1.5rem;
+  }
+
+  .actu-body p {
+    font-family: 'Lora', serif;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: #4a3f2e;
+  }
+
+  .actu-tag {
+    display: inline-block;
+    margin-top: 1rem;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ambre);
+    border: 1px solid rgba(232,137,26,0.3);
+    padding: 0.2rem 0.7rem;
+    border-radius: 20px;
+  }
+
+  /* ===== AGENDA ===== */
+  #agenda { background: linear-gradient(160deg, var(--bleu) 0%, #0f2040 100%); }
+
+  #agenda .section-title { color: var(--blanc); }
+  #agenda .section-label { color: var(--or); }
+
+  .agenda-list {
+    max-width: 700px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .agenda-item {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-left: 4px solid var(--or);
+    padding: 1.2rem 1.5rem;
+    border-radius: 0 2px 2px 0;
+    transition: background 0.2s;
+  }
+
+  .agenda-item:hover { background: rgba(255,255,255,0.08); }
+
+  .agenda-jour {
+    font-family: 'Cinzel', serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--or);
+    min-width: 80px;
+    text-align: center;
+    background: rgba(201,168,76,0.1);
+    padding: 0.5rem;
+    border-radius: 2px;
+  }
+
+  .agenda-info h4 {
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 600;
+    color: var(--blanc);
+    font-size: 0.95rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .agenda-info p {
+    font-size: 0.8rem;
+    color: rgba(253,250,244,0.5);
+  }
+
+  .agenda-heure {
+    margin-left: auto;
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    color: var(--or-clair);
+    white-space: nowrap;
+  }
+
+  /* ===== CONTACT ===== */
+  #contact { background: var(--gris-doux); }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    align-items: start;
+  }
+
+  .contact-info h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    color: var(--bleu);
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    margin-bottom: 1.3rem;
+  }
+
+  .contact-icon {
+    font-size: 1.3rem;
+    min-width: 2.5rem;
+    text-align: center;
+    margin-top: 0.1rem;
+  }
+
+  .contact-item-text strong {
+    display: block;
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ambre);
+    margin-bottom: 0.2rem;
+  }
+
+  .contact-item-text span {
+    font-family: 'Lora', serif;
+    font-size: 0.92rem;
+    color: #4a3f2e;
+    line-height: 1.5;
+  }
+
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+
+  .contact-form input,
+  .contact-form textarea {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.9rem;
+    color: var(--texte);
+    background: var(--blanc);
+    border: 1px solid rgba(13,27,75,0.15);
+    border-radius: 2px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    resize: vertical;
+  }
+
+  .contact-form input:focus,
+  .contact-form textarea:focus {
+    border-color: var(--or);
+    box-shadow: 0 0 0 3px rgba(201,168,76,0.12);
+  }
+
+  .contact-form input::placeholder,
+  .contact-form textarea::placeholder {
+    color: #aaa;
+  }
+
+  .contact-form textarea { min-height: 120px; }
+
+  .btn-send {
+    background: linear-gradient(135deg, var(--bleu), var(--bleu-mid));
+    color: var(--or);
+    padding: 0.9rem 2rem;
+    border: none;
+    border-radius: 2px;
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 15px rgba(13,27,75,0.2);
+  }
+
+  .btn-send:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(13,27,75,0.3);
+  }
+
+  .form-success {
+    display: none;
+    text-align: center;
+    padding: 2rem;
+    color: var(--bleu);
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 1rem;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--bleu);
+    color: rgba(253,250,244,0.5);
+    text-align: center;
+    padding: 2rem 5%;
+    border-top: 1px solid rgba(201,168,76,0.2);
+  }
+
+  footer .footer-name {
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    color: var(--or);
+    margin-bottom: 0.4rem;
+  }
+
+  footer p { font-size: 0.75rem; line-height: 1.8; }
+
+  footer a { color: var(--or); text-decoration: none; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+
+    .identite-grid,
+    .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+
+    .piliers { grid-template-columns: 1fr 1fr; }
+
+    .agenda-item { flex-wrap: wrap; }
+    .agenda-heure { margin-left: 0; }
+
+    section { padding: 60px 5%; }
+  }
+
+  @media (max-width: 480px) {
+    .piliers { grid-template-columns: 1fr; }
+    .hero-cta { flex-direction: column; align-items: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    🕊️ Renouveau Charismatique
+    <span>St François d'Assise – Covè</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#identite">Qui sommes-nous</a></li>
+    <li><a href="#actualites">Actualités</a></li>
+    <li><a href="#agenda">Agenda</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="accueil">
+  <div class="flame-container" id="flames"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Diocèse d'Abomey — Bénin</p>
+    <div class="hero-symbol">🕊️🔥</div>
+    <h1>Renouveau<br><em>Charismatique Catholique</em></h1>
+    <p class="hero-sub">Paroisse Saint François d'Assise de Covè</p>
+    <p class="hero-diocese">Mouvement de l'Esprit Saint</p>
+    <blockquote class="hero-verse">
+      « Comme le souffle d'un vent violent. »<br>
+      <small>Actes 2, 2</small>
+    </blockquote>
+    <div class="hero-cta">
+      <a href="#identite" class="btn-primary">Découvrir le mouvement</a>
+      <a href="#contact" class="btn-ghost">Nous rejoindre</a>
+    </div>
+  </div>
+  <div class="scroll-hint">↓ &nbsp; Défiler</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- QUI SOMMES-NOUS -->
+<section id="identite">
+  <div class="identite-grid">
+    <div class="identite-text">
+      <p class="section-label">Notre identité</p>
+      <h2 class="section-title">Un mouvement né<br>de l'Esprit Saint</h2>
+      <div class="section-line"></div>
+      <p>
+        Le Renouveau Charismatique Catholique de la Paroisse Saint François d'Assise de Covè est une communauté vivante, animée par les dons de l'Esprit Saint, enracinée dans la foi catholique et ouverte à tous ceux qui cherchent une relation profonde avec Dieu.
+      </p>
+      <p>
+        Nous croyons que l'Esprit Saint est à l'œuvre aujourd'hui, transformant les cœurs, guérissant les blessures et suscitant une louange joyeuse au sein du peuple de Dieu en terre béninoise.
+      </p>
+      <p>
+        Fondé sur la Parole de Dieu, le sacrement et la prière communautaire, notre groupe est un espace de croissance spirituelle pour chaque baptisé.
+      </p>
+    </div>
+    <div class="piliers">
+      <div class="pilier">
+        <div class="pilier-icon">🙏</div>
+        <h4>Prière</h4>
+        <p>Réunions hebdomadaires de prière et d'intercession</p>
+      </div>
+      <div class="pilier">
+        <div class="pilier-icon">📖</div>
+        <h4>Parole</h4>
+        <p>Enseignement et méditation de l'Écriture Sainte</p>
+      </div>
+      <div class="pilier">
+        <div class="pilier-icon">🎶</div>
+        <h4>Louange</h4>
+        <p>Adoration et chant pour glorifier le Seigneur</p>
+      </div>
+      <div class="pilier">
+        <div class="pilier-icon">✝️</div>
+        <h4>Évangélisation</h4>
+        <p>Témoigner de la foi dans notre communauté</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACTUALITÉS -->
+<section id="actualites">
+  <div style="max-width:1100px;margin:0 auto;">
+    <p class="section-label">La vie du mouvement</p>
+    <h2 class="section-title">Actualités</h2>
+    <div class="section-line"></div>
+    <div class="actu-grid">
+
+      <div class="actu-card">
+        <div class="actu-header">
+          <p class="actu-date">Avril 2026</p>
+          <h3>Semaine Sainte & Pâques</h3>
+        </div>
+        <div class="actu-body">
+          <p>Le Renouveau a vécu une Semaine Sainte intense : vigile pascale, chemin de croix communautaire et célébration de la Résurrection du Seigneur dans la joie et la louange.</p>
+          <span class="actu-tag">Liturgie</span>
+        </div>
+      </div>
+
+      <div class="actu-card">
+        <div class="actu-header">
+          <p class="actu-date">Mars 2026</p>
+          <h3>Campagne d'Évangélisation Paroissiale</h3>
+        </div>
+        <div class="actu-body">
+          <p>Du 26 mars au 1er avril, notre équipe a mené une campagne d'évangélisation dans les quartiers de Covè, avec des témoignages, chants et distribution de supports catéchétiques.</p>
+          <span class="actu-tag">Évangélisation</span>
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+</section>
+
+<!-- AGENDA -->
+<section id="agenda">
+  <div style="max-width:700px;margin:0 auto;text-align:center;margin-bottom:3rem;">
+    <p class="section-label">Planning</p>
+    <h2 class="section-title">Agenda des activités</h2>
+    <div class="section-line" style="margin:0 auto 0;"></div>
+  </div>
+  <div class="agenda-list">
+    <div class="agenda-item">
+      <div class="agenda-jour">Chaque<br>Mardi</div>
+      <div class="agenda-info">
+        <h4>Messe suivie d'Assemblée de Prière</h4>
+        <p>Paroisse Saint François d'Assise de Covè</p>
+      </div>
+      <div class="agenda-heure">18h30</div>
+    </div>
+    <div class="agenda-item">
+      <div class="agenda-jour">Chaque<br>Lundi</div>
+      <div class="agenda-info">
+        <h4>Service Animation</h4>
+        <p>Paroisse Saint François d'Assise de Covè</p>
+      </div>
+      <div class="agenda-heure">19h00</div>
+    </div>
+    <div class="agenda-item">
+      <div class="agenda-jour">Chaque<br>Mercredi</div>
+      <div class="agenda-info">
+        <h4>Prière dans les Fraternités et Groupes de Vie</h4>
+        <p>Paroisse Saint François d'Assise de Covè</p>
+      </div>
+      <div class="agenda-he
